@@ -26,15 +26,11 @@ public class MainGui extends JDialog {
 
         buttonExit.addActionListener(e -> onExit());
 
-        // call onCancel() when cross is clicked
-
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onExit();
             }
         });
-
-        // call onCancel() on ESCAPE
         contentPane
                 .registerKeyboardAction(e -> onExit(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
                         JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -66,8 +62,7 @@ public class MainGui extends JDialog {
                         Thread.sleep(FIVE_SECONDS);
                     }
                 } catch (InterruptedException e) {
-                    // Oczekiwane przerwanie wątku - bez reakcji
-                    Thread.currentThread().interrupt(); // Upewnij się, że stan przerwania jest ustawiony
+                    Thread.currentThread().interrupt();
                 }
             });
             cursorThread.start();
