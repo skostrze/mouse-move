@@ -24,11 +24,7 @@ public class MainGui extends JDialog {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonAction);
 
-        buttonExit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onExit();
-            }
-        });
+        buttonExit.addActionListener(e -> onExit());
 
         // call onCancel() when cross is clicked
 
@@ -47,14 +43,11 @@ public class MainGui extends JDialog {
         buttonAction.setText(action);
 
 
-        buttonAction.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    onAction();
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
+        buttonAction.addActionListener(e -> {
+            try {
+                onAction();
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
