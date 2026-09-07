@@ -12,17 +12,24 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mainClass>pl.com.slaw.MainGui</mainClass>
     </properties>
 
     <build>
+        <!-- // [END os-maven-plugin] -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -30,7 +37,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>pl.com.slaw.MainGui</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -47,7 +54,26 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <configuration>
+                            <target>
+                                <copy file="target/${project.artifactId}-${project.version}-jar-with-dependencies.jar" tofile="target/${project.artifactId}.jar"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <!-- // [START footer] -->
     </build>
 
 </project>

@@ -17,7 +17,22 @@ public class MainGui extends JDialog {
     private final Robot robot;
     private final Random random;
     private Thread cursorThread;
+
+    private void createUiComponents() {
+        contentPane = new JPanel(new BorderLayout(10, 10));
+        JPanel buttonsPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+
+        buttonAction = new JButton("Start");
+        buttonExit = new JButton("Exit");
+
+        buttonsPanel.add(buttonAction);
+        buttonsPanel.add(buttonExit);
+        contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPane.add(buttonsPanel, BorderLayout.CENTER);
+    }
+
     public MainGui() throws AWTException {
+        createUiComponents();
         setModal(true);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
